@@ -1,0 +1,24 @@
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
+name: CI Build Automation - Basic # name of the workflow
+
+on: [push, pull_request] # defines events that can trigger the workflow
+
+env:
+  DATABASE_URL: "https://temp.com"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Typecheck typescript code
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint # checks your Typescript code for common problems, such as syntax errors, formatting issues, code style violations, and potential bugs.
