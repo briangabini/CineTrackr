@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* :root {
+  --font-sans: , sans-serif;
+} */
+
+@layer base {
+  span {
+    @apply font-mono;
+  }
+}
