@@ -28,7 +28,7 @@ const CreateMovieWizard = () => {
   const { mutate: createMovie, isLoading: isCreating } = api.movies.createMovie.useMutation({
     onSuccess: () => {
       setInput("");
-
+      dismissToast();
       // Invalidating a query with react-query causes it to automatically refetch the data, ensuring that your UI stays up-to-date after the mutation.
       void ctx.movies.getMoviesByUserId.invalidate();
     },
@@ -39,6 +39,7 @@ const CreateMovieWizard = () => {
       } else {
         toast.error("Failed to post! Please Try again later.")
       }
+      dismissToast();
     }
   })
   
@@ -50,10 +51,16 @@ const CreateMovieWizard = () => {
     })
   }
 
+  function dismissToast(){
+    toast.dismiss('loading')
+  }
+
   return (
     // TODO: field inputs
     // temp w/o designs yet
     <div className="absolute left-12 top-12 mt-10 flex w-4/12 mb-5 grow py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-stone-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0">
+
+    {/* movie title input */}
       <input
         placeholder="Enter Movie Title"
         type="text"
@@ -74,7 +81,9 @@ const CreateMovieWizard = () => {
       />
 
         {input !== "" && !isCreating && (
-          <button onClick={() => createMovie({ title: input })}>
+          <button onClick={() => {
+              createMovie({ title: input });
+          }}>
             Add
           </button>
         )}
