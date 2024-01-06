@@ -8,7 +8,6 @@ import {
 
 // new imports
 import { TRPCError } from "@trpc/server";
-import { clerkClient } from "@clerk/nextjs/server";
 
 export const moviesRouter = createTRPCRouter({
   // gets the movies of the user
@@ -67,13 +66,14 @@ export const moviesRouter = createTRPCRouter({
       return movie;
     }),
 
-
-
   // adds a movie to the list
   createMovie: privateProcedure
     .input(
       z.object({
         title: z.string().min(1).max(250),
+        director: z.string().min(1).max(250),
+        genre: z.string().min(1).max(250),
+        rating: z.number().min(0).max(5),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -82,6 +82,9 @@ export const moviesRouter = createTRPCRouter({
       const movie = await ctx.db.movie.create({
         data: {
           title: input.title,
+          director: input.director,
+          genre: input.genre,
+          rating: input.rating,
           userId: authorId,
         },
       });

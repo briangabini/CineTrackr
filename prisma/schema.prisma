@@ -11,31 +11,23 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// model User {
-//   id        Int      @id @default(autoincrement())
-//   name      String
-//   email     String   @unique
-//   password  String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-
-//   movies Movie[]
-// }
-
 model Movie {
   id String @id @default(cuid())
 
   title String
+
+  director String @default("N/A")
+
+  // possible genres are: action, adventure, comedy, drama, fantasy, horror, mystery, thriller, western
+  genre String @default("N/A")
+
+  rating Int @default(0) // rating can be from 0 - 5, typecheck using z.min(0) && z.max(5)
 
   createdAt DateTime @default(now())
 
   updatedAt DateTime @updatedAt
 
   userId String
-
-  // releaseDate DateTime
-  // genre       String  @db.VarChar(255)
-  // user User @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
