@@ -24,7 +24,7 @@ export const NavBar = (props: { isSignedIn: boolean }) => {
 
     return (
         <nav className="bg-[#edede9] absolute top-0 w-full m-auto">
-            <div className="max-w-screen-xl flex flex-wrap items-centerjustify-between mx-auto p-4">
+            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <span className="self-center text-2xl font-semibold px-2">CineTrackr</span>
 
                 {/* md:block md:w-auto */}

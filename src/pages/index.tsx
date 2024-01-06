@@ -49,12 +49,13 @@ const CreateMovieWizard = () => {
   return (
     // TODO: field inputs
     // temp w/o designs yet
-    <div className="flex w-full mb-5">
+    <div className="absolute left-12 top-12 mt-10 flex w-4/12 mb-5 grow py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-stone-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0">
       <input
         placeholder="Enter Movie Title"
         type="text"
         value={input}
-        className="block py-2.5 w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-stone-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+        // className="grow py-2.5 w-full px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-stone-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0"
+        className="grow bg-transparent outline-none"
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
@@ -68,18 +69,17 @@ const CreateMovieWizard = () => {
         disabled={isCreating}
       />
 
-      {input !== "" && !isCreating && (
-        <button onClick={() => createMovie({ title: input })}>
-          List Movie
-        </button>
-      )}
+        {input !== "" && !isCreating && (
+          <button onClick={() => createMovie({ title: input })}>
+            Add
+          </button>
+        )}
 
       {/* {isCreating && (
         <div className="flex items-center justify-center">
           <LoadingDot />
         </div>
       )} */}
-
 
     </div>
   )
