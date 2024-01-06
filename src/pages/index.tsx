@@ -41,9 +41,13 @@ const CreateMovieWizard = () => {
       }
     }
   })
+  
+  console.log(user)
 
   if (isCreating) {
-    toast.loading('Creating movie...')
+    toast.loading('Creating movie...',{
+      id: 'loading'
+    })
   }
 
   return (
@@ -81,6 +85,26 @@ const CreateMovieWizard = () => {
         </div>
       )} */}
 
+    </div>
+  )
+}
+
+const MovieList = () => {
+  const { data, isLoading: moviesLoading } = api.movies.getMoviesByUserId.useQuery({ userId: "user_2aWnhrb2ehojpo7Rg2YNS7UNXHS" })
+  
+  console.log(data)
+
+  if (!data) {
+    return <div>Something went wrong</div>
+  }
+
+  return (
+    <div className="flex flex-col">
+      {data.map((movie) => (
+        <div key={movie.id}>
+          <p>{movie.title}</p>
+        </div>
+      ))}
     </div>
   )
 }
@@ -125,6 +149,9 @@ export default function Home() {
         {isSignedIn && (
           <CreateMovieWizard />
         )}
+
+        <MovieList />
+        
       </PageLayout>
 
     </>
